@@ -1,0 +1,24 @@
+{
+  "name": "junction-workshop",
+  "version": "0.0.1",
+  "description": "What am I about?",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.15.2",
+    "spotify-web-api-node": "^2.3.6"
+  },
+  "engines": {
+    "node": "6.10.x"
+  },
+  "author": "Arielle Vaniderstine",
+  "license": "MIT",
+  "keywords": [
+    "node",
+    "glitch",
+    "express",
+    "spotify"
+  ]
+}
