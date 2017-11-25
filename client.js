@@ -1,5 +1,34 @@
+
 // --------------------------------------------------------------------------------------------------- //
+// Algorithm Constants - This is where the magic essence is stored
 // --------------------------------------------------------------------------------------------------- //
+const genreMap = {
+  'Action': ['Rock', 'Alt-Rock', 'Alternative', 'Heavy Metal', 'Dubstep', 'Blues', 'Breakbeat', 'Chicago House', 'Club', 'Dancehall', 'Death Metal', 'Deep-house', 'Disco', 'Electro', 'Electronic', 'Garage', 'Goth', 'Grunge', 'Guitar', 'Hard Rock', 'Hardcore', 'Hardstyle', 'Hip-hop', 'Indie pop', 'Industrial', 'Iranian', 'Metal', 'Metal-misc', 'Movies', 'Party', 'Power-pop', 'Psych-rock', 'Punk-rock', 'R-N-B', 'Rock', 'SKA', 'Soundtracks'],
+  'Adventure': ['Acoustic', 'Alt-Rock', 'Bossanova', 'Disney', 'Folk', 'Funk', 'Groove', 'Happy', 'Heavy Metal', 'J-pop', 'Movies',  'Classical', 'MPB', 'New-age', 'Opera', 'Pop-film', 'Rainy-day', 'Show-tunes', 'Soundtracks'],
+  'Animation': ['Anime', 'Children', 'Disney', 'French', 'Holidays', 'J-idol', 'Kids', 'Movies', 'Show-tunes', 'Soundtracks'],
+  'Comedy': ['Alt-Rock', 'British', 'Comedy', 'Dancehall', 'Disco', 'Funk', 'German', 'Gospel', 'Holidays', 'Indian', 'Kids', 'Movies', 'Reggaeton', 'Rock-N-Roll', 'Show-tunes', 'Soul', 'Soundtracks'],
+  'Crime': ['Blues', 'Breakbeat', 'Chicago House', 'Club', 'Funk', 'Garage', 'Gospel', 'Grunge', 'Guitar', 'Hard Rock', 'Hardstyle', 'Hip-hop', 'Honky-Tonk', 'Industrial', 'Movies', 'Power-pop', 'Psych-rock', 'Punk', 'R-N-B', 'Reggae', 'Rock', 'Rockabilly', 'Soundtracks'],
+  'Documentary': ['Acoustic', 'Afrobeat', 'Alternative', 'Ambient', 'Chill', 'Classical', 'Folk', 'French', 'Hip-hop', 'Malay', 'MPB', 'New-age', 'Opera', 'Piano', 'Soundtracks'],
+  'Drama': ['Acoustic', 'Blues', 'Bossanova', 'British', 'Chill', 'Classical', 'EMO', 'French', 'Happy', 'Honky-Tonk', 'Indie', 'Indie pop', 'Jazz', 'Movies', 'New-age', 'Opera', 'Piano', 'Power-pop', 'Punk', 'Punk-rock', 'Rainy-day', 'Romance', 'Sad', 'Singer-songwriter', 'Sleep', 'Soundtracks'],
+  'Family': ['Acoustic', 'Brazil', 'British', 'Children', 'Country', 'Disco', 'Forro', 'Groove', 'Happy', 'Holidays', 'Indian', 'Iranian', 'Jazz', 'Kids',  'Latin', 'Movies', 'Rock-N-Roll', 'Show-tunes', 'Soundtracks'],
+  'Fantasy': ['Acoustic', 'Bossanova', 'Chill', 'Dance', 'Disney', 'EMO', 'Folk', 'Happy', 'Heavy Metal', 'New-age', 'Piano', 'Show-tunes', 'Soundtracks' ],
+  'History': ['Ambient', 'Chill', 'Folk', 'French', 'Indie', 'Iranian', 'Malay', 'Movies', 'New-age', 'Opera', 'Show-tunes', 'Soundtracks'],
+  'Horror': ['Ambient', 'Breakbeat', 'Club', 'Death Metal', 'EMO',  'Grindcore', 'Heavy Metal', 'Metal', 'Metalcore', 'Movies', 'Rock', 'Soundtracks'],
+  'Music': ['Blues', 'Acoustic', 'Afrobeat', 'Bossanova', 'Chill', 'Classical', 'Dance', 'Dancehall', 'Forro', 'Funk', 'Gospel',  'Groove', 'Happy', 'Hip-hop', 'Indian', 'J-idol', 'Jazz', 'Kids', 'Latin', 'Movies', 'MPB', 'Pagode', 'Party', 'R-N-B', 'Reggae', 'Reggaeton', 'Rock', 'Rock-N-Roll', 'Rockabilly', 'Salsa', 'Samba', 'Show-tunes', 'Soul', 'Soundtracks'],
+  'Mystery': ['Ambient', 'Club', 'Blues', 'Classical', 'Electro', 'Funk', 'Garage', 'Goth', 'Hard Rock', 'Industrial', 'Jazz', 'Movies', 'Psych-rock', 'Punk', 'Soundtracks'],
+  'Romance': ['Blues', 'Acoustic', 'Bossanova', 'Brazil', 'British', 'Cantopop', 'Chill', 'Classical', 'Country', 'Dance', 'Disco', 'Disney', 'Forro', 'French', 'Happy', 'Holidays', 'Indian', 'J-pop', 'Jazz', 'K-pop', 'Latin', 'Latino', 'Mandopop', 'Movies', 'MPB', 'Pagode', 'Party', 'Philippines-OPM', 'Piano', 'Pop', 'Rainy-day', 'Reggaeton', 'Rock-N-Roll', 'Romance', 'Sad', 'Salsa', 'Samba', 'Sertanejo', 'Sleep', 'Soundtracks'],
+  'Science Fiction': ['Alt-Rock', 'Alternative', 'Ambient', 'Breakbeat', 'Club', 'Detroit-techno', 'Drum-and-bass', 'Dub', 'Dubstep', 'EDM', 'Electro', 'Electronic', 'Goth', 'Groove', 'Guitar', 'Hardstyle', 'House', 'IDM', 'Indie', 'Industrial', 'Iranian', 'J-dance', 'J-rock', 'Metal', 'Metal-misc', 'Minimal-techno', 'Movies', 'Party', 'Post-dubstep', 'Power-pop', 'Progressive-house', 'Psych-rock', 'Rock', 'Rockabilly', 'Soundtracks'],
+  'TV Movie': ['Acoustic', 'Alt-Rock', 'Bossanova', 'Brazil', 'Cantopop', 'Chill', 'Country', 'Dance', 'Disco', 'Groove', 'Happy', 'Jazz',  'Latin', 'Latino', 'Movies', 'Pop', 'Pop-film', 'Reggaeton', 'Samba', 'Sertanejo', 'Soul', 'Soundtracks'],
+  'Thriller': ['Ambient', 'Club', 'Electro', 'EMO', 'Garage', 'Goth', 'Grunge', 'IDM', 'Movies', 'Punk-rock', 'Soundtracks'],
+  'War': ['Acoustic', 'Breakbeat', 'Classical', 'Country', 'Drum-and-bass', 'Grindcore', 'Grunge', 'Hard Rock', 'Metal', 'Movies', 'Power-pop', 'Rock', 'Soundtracks'],
+  'Western': ['Bluegrass', 'Country', 'Forro', 'Honky-Tonk', 'Movies', 'Sertanejo', 'Soundtracks']
+}
+
+
+// --------------------------------------------------------------------------------------------------- //
+// Authentication - in case of use authentication, creates web player instance
+// --------------------------------------------------------------------------------------------------- //
+
  const hash = window.location.hash
   .substring(1)
   .split('&')
@@ -51,7 +80,9 @@
   }
 // Initialise the Web Playback SDK
 
-// Service Logic
+// --------------------------------------------------------------------------------------------------- //
+// Service Logic - HTTP calls to backend
+// --------------------------------------------------------------------------------------------------- //
 let topTrackUris;
 let topTrackIds;
 let topTrackCombinedAnalysis;
@@ -150,8 +181,9 @@ function analyzeTracks(uris) {
   });
  }
   
-// Controller Logic
-$(function() {
+// --------------------------------------------------------------------------------------------------- //
+// Controller Logic - Frontend unicorns and rainbows below
+// --------------------------------------------------------------------------------------------------- //$(function() {
   let trackID = '';
   let searchQuery = '';
   let resultIDs = [];
@@ -175,7 +207,6 @@ $(function() {
     });
     
   });
-}); 
 
   function getAverageAnalysis(tracks) {
     
@@ -229,19 +260,6 @@ $(function() {
       trackEl.appendTo('#top-analysis');
     
     return trackAnalysis;
-  }
-  
-  let musicData = {
-    genres: ['Rock', 'Pop', 'Alternative Rock'],
-    acousticness: 0.17,
-    danceability: 0.17,
-    energy: 0.17,
-    instrumentalness: 0.17,
-    liveness: 0.17,
-    mode: 1,
-    speechiness: 0.17,
-    tempo: 120,
-    valence: 0.17
   }
   
   function discoverMovies(musicData) {
