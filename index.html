@@ -12,12 +12,20 @@
       integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
       crossorigin="anonymous"></script>
     
-    <!-- Include the Spotify Player --> 
-    <script src="https://sdk.scdn.co/spotify-player.js"></script>
+    <!-- Include the Spotify Player
+    <script src="https://sdk.scdn.co/spotify-player.js"></script> --> 
     
   </head>
   <body class="container">
-  
+      <form>
+        <input type="text" maxlength="100" placeholder="Track Name">
+        <button class="btn btn-sm btn-green" type="submit">Submit</button>
+      </form>
+      <section class="features">
+        <ul id="results">
+        </ul>
+      <ol id="top-analysis"></ol>
+    </section>
     <!-- Include our code -->
     <script src="./client.js"></script>
   </body>
