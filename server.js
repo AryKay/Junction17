@@ -32,8 +32,10 @@ spotifyApi.clientCredentialsGrant()
 
 
 // Initialize TheMovieDB API Wrapper
-const MovieDB = require('moviedb')('164ad7474a23d25a1c60930b77f4f6aa');
+const MovieDB = require('moviedb')(process.env.MOVDB_ID);
 
+// Initialize Lyrics Wikia API Wrapper
+var l = require("lyric-get");
 
 //-------------------------------------------------------------//
 //------------------------- API CALLS -------------------------//
@@ -89,6 +91,16 @@ app.get("/search", function (request, response) {
   });
 });
 
+app.get("/track-lyrics", function(request, response) {
+l.get(request.query.artist.replace(/ /g,"_"), request.query.name.replace(/ /g,"_"), function(err, res){
+    if(err){
+        response.send('');
+    }
+    else{
+        response.send(res);
+    }
+});
+});
 
 //------------------------ WEB SERVER -------------------------//
 
