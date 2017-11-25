@@ -1,24 +1,26 @@
 {
-  "name": "junction-workshop",
+  "name": "Team GG MRE",
   "version": "0.0.1",
-  "description": "What am I about?",
+  "description": "What am I to you, if not but a mere reflection of yourself?",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
     "express": "^4.15.2",
-    "spotify-web-api-node": "^2.3.6"
+    "spotify-web-api-node": "^2.3.6",
+    "moviedb": "^0.2.10"
   },
   "engines": {
     "node": "6.10.x"
   },
-  "author": "Arielle Vaniderstine",
+  "author": "Arian Kermanchi",
   "license": "MIT",
   "keywords": [
     "node",
     "glitch",
     "express",
-    "spotify"
+    "spotify",
+    "moviedb"
   ]
 }

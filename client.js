@@ -63,3 +63,91 @@ window.onSpotifyWebPlaybackSDKReady = function () {
   // Connect to the player!
   player.connect();
 }
+
+// Make necessary calls
+
+getTopTracks();
+
+let topTrackUris;
+let topTrackIds;
+let topTrackCombinedAnalysis;
+
+function getTopTracks() {
+  $.get('/top-tracks?token=' + _token, function(tracks) {
+    console.log(tracks)
+    let uris = [];
+    let ids = [];
+    
+    tracks.forEach(function(track) {
+      let trackEl = $('<li>' + track.name + '</li>') ;
+      trackEl.appendTo('#top-tracks');
+      uris.push(track.uri);
+      ids.push(track.id);
+    });
+    
+    topTrackUris = uris.join(',');
+    topTrackIds = ids.join(',');
+    analyzeTracks(topTrackIds);
+  });
+}
+
+function analyzeTracks(uris) {
+  $.get('/audio-analysis-multi?uris=' + uris + '&token=' + _token, function(tracks) {
+    topTrackCombinedAnalysis = getAverageAnalysis(tracks);
+    
+    // tracks.forEach(function(track) {
+    //   let trackEl = $('<li>' + 
+    //   'acousticness: ' + track.acousticness +  '<br>' +              
+    //   'danceability: ' + track.danceability + '<br>' +
+    //   'energy: ' + track.energy + '<br>' +
+    //   'instrumentalness: ' + track.instrumentalness + '<br>' +
+    //   'liveness: ' + track.liveness + '<br>' +
+    //   'mode: ' + track.mode + '<br>' +
+    //   'speechiness: ' + track.speechiness + '<br>' +
+    //   'tempo: ' + track.tempo + '<br>' +
+    //   'valence: ' + track.valence 
+    //                   + '</li>') ;
+    //   trackEl.appendTo('#top-analysis');
+    // });
+  });
+  
+  function getAverageAnalysis(tracks) {
+    
+      let trackAnalysis = {
+        acousticness: 0,
+        danceability: 0,
+        energy: 0,
+        instrumentalness: 0,
+        liveness: 0,
+        mode: 0,
+        speechiness: 0,
+        tempo: 0,
+        valence: 0
+      };
+    
+      tracks.forEach(function(track) {
+      trackAnalysis.acousticness += track.acousticness;
+      trackAnalysis.danceability += track.danceability;
+      trackAnalysis.energy += track.energy;
+      trackAnalysis.instrumentalness += track.instrumentalness;
+      trackAnalysis.liveness += track.liveness;
+      trackAnalysis.mode += track.mode;
+      trackAnalysis.speechiness += track.speechiness;
+      trackAnalysis.tempo += track.tempo;
+      trackAnalysis.valence += track.valence;
+    });
+    
+    // take average analysis of the songs
+    trackAnalysis.acousticness = trackAnalysis.acousticness/tracks.length;
+    trackAnalysis.danceability = trackAnalysis.danceability/tracks.length;
+    trackAnalysis.energy = trackAnalysis.energy/tracks.length;
+    trackAnalysis.instrumentalness = trackAnalysis.instrumentalness/tracks.length;
+    trackAnalysis.liveness = trackAnalysis.liveness/tracks.length;
+    trackAnalysis.mode = trackAnalysis.mode/tracks.length;
+    trackAnalysis.speechiness = trackAnalysis.speechiness/tracks.length;
+    trackAnalysis.tempo = trackAnalysis.tempo/tracks.length;
+    trackAnalysis.valence = trackAnalysis.valence/tracks.length;
+    
+    return trackAnalysis;
+  }
+}

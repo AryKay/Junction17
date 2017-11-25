@@ -16,42 +16,28 @@ app.get("/", function (request, response) {
 var SpotifyWebApi = require('spotify-web-api-node');
 spotifyApi = new SpotifyWebApi();
 
+// Initialize TheMovieDB API Wrapper
+const MovieDB = require('moviedb')('164ad7474a23d25a1c60930b77f4f6aa');
+
 
 //-------------------------------------------------------------//
 //------------------------- API CALLS -------------------------//
 //-------------------------------------------------------------//
 
-
-app.post('/transfer', function (req, res) {
-  spotifyApi.setAccessToken(req.query.token);
-  console.log(req.query)
-  
-  // Transfer playback to specified device
-  spotifyApi.transferMyPlayback({device_ids: [req.query.device_id]})
-    .then(function(data) {
-      res.sendStatus(200);
-    }, function(err) {
-      console.error(err);
-    });
-});
-
-app.post('/play', function (req, res) {
-  spotifyApi.setAccessToken(req.query.token);
-  
-  // Play specified tracks
-  spotifyApi.play({uris: req.query.uris.split(',')})
-    .then(function(data) {
-      res.sendStatus(200);
-    }, function(err) {
-      console.error(err);
-    });
+app.get('/audio-analysis-multi', function(req, res) {
+  spotifyApi.getAudioFeaturesForTracks(req.query.uris.split(','))
+  .then(function(data) {
+    res.send(data.body.audio_features)
+  }, function(err) {
+    console.error(err);
+  });
 });
 
 app.get('/top-tracks', function (req, res) {
   spotifyApi.setAccessToken(req.query.token);
   
   // Get the current user's top tracks
-  spotifyApi.getMyTopTracks({limit: 5, time_range: 'medium_term'})
+  spotifyApi.getMyTopTracks({limit: 50, time_range: 'medium_term'})
     .then(function(data) {
       res.send(data.body.items);
     }, function(err) {
