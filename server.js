@@ -4,6 +4,7 @@
 // init project
 var express = require('express');
 var app = express();
+var stringSimilarity = require('string-similarity');
 
 app.use(express.static(__dirname + '/'));
 
@@ -100,6 +101,28 @@ l.get(request.query.artist.replace(/ /g,"_"), request.query.name.replace(/ /g,"_
         response.send(res);
     }
 });
+});
+
+app.get("/discover-movies", function (request, response) {
+  MovieDB.discoverMovie({ with_genres: request.query.relevantGenres, without_genres: request.query.irrelevantGenres, language: 'en-US', sort_by: 'popularity.desc', include_adult: false, include_video: false, page: request.query.page }, (err, res) => {
+    if(err){
+        response.send({results: []});
+    }
+    else{
+        response.send(res);
+    }
+  });
+});
+
+app.get("/get-movie-keywords", function (request, response) {
+  MovieDB.movieKeywords({  }, (err, res) => {
+    if(err){
+        response.send({results: []});
+    }
+    else{
+        response.send(res.keywords);
+    }
+  });
 });
 
 //------------------------ WEB SERVER -------------------------//
