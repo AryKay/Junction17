@@ -234,6 +234,7 @@ const genreMap = {
 }
 
 $('#mu-apps-screenshot').hide();
+$('#loader').hide();
 
 // --------------------------------------------------------------------------------------------------- //
 // Authentication - in case of use authentication, creates web player instance
@@ -435,7 +436,7 @@ function getMovieKeywords(movies) {
   $('form').submit(function(event) {
     
     event.preventDefault();
-    
+    $('#loader').show();
     searchQuery = '/search?query=' + $('input').val();
     
     $.get(searchQuery, function(data) {
@@ -587,6 +588,7 @@ function rankMovies(movies) {
       movieResults.push(movie);
     });
     console.log(movieResults);
+    $('#loader').hide();
   }
   
   // sort descendingly
