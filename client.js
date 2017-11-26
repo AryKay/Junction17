@@ -393,6 +393,14 @@ function discoverMovies(relevantGenres, irrelevantGenres) {
     });
   });
  }
+
+function getMovieKeywords(movies) {
+  movies.forEach((movie) => {  
+    $.get('/get-movie-keywords?movieId=' + movie.id, function(keywords) {  
+      movie['keywords'] = keywords;
+    });
+  });
+ }
   
 // --------------------------------------------------------------------------------------------------- //
 // Controller Logic - Frontend unicorns and rainbows below
@@ -413,7 +421,6 @@ function discoverMovies(relevantGenres, irrelevantGenres) {
       
       $('#results').empty();
       data.tracks.items.forEach(function(track, index) {
-        console.log(track);
         resultIDs.push(track.id);
         let newEl = $('<li class="text-black" onClick="getFeatures(&apos;' + track.id + '&apos;,&apos;' + track.artists[0].id + '&apos;,&apos;' + track.artists[0].name.replace('\'', '') + '&apos;,&apos;' + track.name.replace('\'', '') + '&apos;)"></li>').text(track.name + '   |   ' + track.artists[0].name);
         $('#results').append(newEl);
@@ -558,7 +565,7 @@ function rankMovies(movies) {
   movieResults.sort(function(a, b) {
     return b.score - a.score;
   });
-  console.log(movieResults);
+  //getMovieKeywords(movieResults);
 }
 
 function sortByFrequency(string) {
@@ -570,7 +577,6 @@ function sortByFrequency(string) {
   filteredString = filteredString.replace('(', ' ');
   filteredString = filteredString.replace('?', ' ');
   filteredString = filteredString.toLowerCase();
-  console.log(filteredString);
 
 
   let array = filteredString.split(' ');

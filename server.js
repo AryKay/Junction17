@@ -114,6 +114,17 @@ app.get("/discover-movies", function (request, response) {
   });
 });
 
+app.get("/get-movie-keywords", function (request, response) {
+  MovieDB.movieKeywords({  }, (err, res) => {
+    if(err){
+        response.send({results: []});
+    }
+    else{
+        response.send(res.keywords);
+    }
+  });
+});
+
 //------------------------ WEB SERVER -------------------------//
 
 // Listen for requests to our app
