@@ -573,7 +573,7 @@ function prepareMovieSearch(trackAnalysis) {
 function rankMovies(movies) {
   if(movies['type'] != 'error') {
     movies.forEach((movie) => {
-      let score = 0
+      let score = 1
       for (var key in genreScores) {
         if (genreScores.hasOwnProperty(key)) {
           if(movie.genre_ids.includes(genreScores[key].id)) {
