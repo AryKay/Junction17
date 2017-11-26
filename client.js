@@ -233,7 +233,7 @@ const genreMap = {
     genre:  ['Bluegrass', 'Country', 'Forro', 'Honky-Tonk', 'Movies', 'Sertanejo', 'Soundtracks']}
 }
 
-
+$('#mu-apps-screenshot').hide();
 // --------------------------------------------------------------------------------------------------- //
 // Authentication - in case of use authentication, creates web player instance
 // --------------------------------------------------------------------------------------------------- //
@@ -380,6 +380,7 @@ function analyzeTracks(uris) {
   });
  }
 
+// function to discover 100 movies at a time (20 per call)
 function discoverMovies(relevantGenres, irrelevantGenres) {
   $.get('/discover-movies?relevantGenres=' + relevantGenres.join('|') + '&irrelevantGenres=' + irrelevantGenres + '&page=1', function(movies1) {  
     $.get('/discover-movies?relevantGenres=' + relevantGenres.join('|') + '&irrelevantGenres=' + irrelevantGenres + '&page=2', function(movies2) {  
@@ -393,6 +394,13 @@ function discoverMovies(relevantGenres, irrelevantGenres) {
     });
   });
  }
+
+// function discoverMovies(relevantGenres, irrelevantGenres) {
+//   $.get('/discover-movies?relevantGenres=' + relevantGenres.join('|') + '&irrelevantGenres=' + irrelevantGenres, function(movies) {  
+//        rankMovies(movies.results);
+
+//   });
+//  }
 
 function getMovieKeywords(movies) {
   movies.forEach((movie) => {  
@@ -420,11 +428,13 @@ function getMovieKeywords(movies) {
     $.get(searchQuery, function(data) {
       
       $('#results').empty();
-      data.tracks.items.forEach(function(track, index) {
-        resultIDs.push(track.id);
-        let newEl = $('<li class="text-black" onClick="getFeatures(&apos;' + track.id + '&apos;,&apos;' + track.artists[0].id + '&apos;,&apos;' + track.artists[0].name.replace('\'', '') + '&apos;,&apos;' + track.name.replace('\'', '') + '&apos;)"></li>').text(track.name + '   |   ' + track.artists[0].name);
-        $('#results').append(newEl);
-      }); 
+      // For being able to see search results and choose preferred track, but for demo purposes we skip this stage and take the liberty to choose for the user
+      //data.tracks.items.forEach(function(track, index) {
+       // resultIDs.push(track.id);
+       // let newEl = $('<li class="text-black" onClick="getFeatures(&apos;' + track.id + '&apos;,&apos;' + track.artists[0].id + '&apos;,&apos;' + track.artists[0].name.replace('\'', '') + '&apos;,&apos;' + track.name.replace('\'', '') + '&apos;)"></li>').text(track.name + '   |   ' + track.artists[0].name);
+      //  $('#results').append(newEl);
+     // }); 
+     getFeatures(data.tracks.items[0].id, data.tracks.items[0].artists[0].id, data.tracks.items[0].artists[0].name.replace('\'', ''), data.tracks.items[0].name.replace('\'', ''));
       
     });
     
@@ -566,6 +576,23 @@ function rankMovies(movies) {
     return b.score - a.score;
   });
   //getMovieKeywords(movieResults);
+
+  // render results
+$('#mu-apps-screenshot').show();
+    let htmlParser = '';
+     movieResults.forEach((movie) => {
+              if(movie.poster_path != null) {
+                htmlParser += '<div class="mu-single-screeshot">'+
+                    '<img src="http://image.tmdb.org/t/p/w500/' + movie.poster_path + '" alt="App screenshot img">'+
+                 ' </div>';
+              }
+              });
+     console.log(htmlParser);
+
+
+$('.mu-apps-screenshot-slider').html(htmlParser).slick('refresh');
+
+
 }
 
 function sortByFrequency(string) {

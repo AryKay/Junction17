@@ -16,8 +16,8 @@ app.get("/", function (request, response) {
 // Initialize Spotify API wrapper
 var SpotifyWebApi = require('spotify-web-api-node');
 var spotifyApi = new SpotifyWebApi({
-  clientId : process.env.CLIENT_ID,
-  clientSecret : process.env.CLIENT_SECRET,
+  clientId : '36589942a9084b449dc8d5fdfabe2644',
+  clientSecret : 'bc57b04d43f3433aa064de9782c20880',
 });
 
 spotifyApi.clientCredentialsGrant()
@@ -33,7 +33,7 @@ spotifyApi.clientCredentialsGrant()
 
 
 // Initialize TheMovieDB API Wrapper
-const MovieDB = require('moviedb')(process.env.MOVDB_ID);
+const MovieDB = require('moviedb')('164ad7474a23d25a1c60930b77f4f6aa');
 
 // Initialize Lyrics Wikia API Wrapper
 var l = require("lyric-get");
