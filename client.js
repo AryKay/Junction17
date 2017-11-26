@@ -14,7 +14,7 @@ const genreMap = {
     speechiness: [0, 1],
     tempo: [65, 200],
     valence: [0, 1],
-    genre: ['Rock', 'Alt-Rock', 'Alternative', 'Heavy Metal', 'Dubstep', 'Blues', 'Breakbeat', 'Chicago House', 'Club', 'Dancehall', 'Death Metal', 'Deep-house', 'Disco', 'Electro', 'Electronic', 'Garage', 'Goth', 'Grunge', 'Guitar', 'Hard Rock', 'Hardcore', 'Hardstyle', 'Hip-hop', 'Indie pop', 'Industrial', 'Iranian', 'Metal', 'Metal-misc', 'Movies', 'Party', 'Power-pop', 'Psych-rock', 'Punk-rock', 'R-N-B', 'Rock', 'SKA', 'Soundtracks']},
+    genre: ['Rock', 'Alt-Rock', 'Pop', 'Alternative', 'Heavy Metal', 'Dubstep', 'Blues', 'Breakbeat', 'Chicago House', 'Club', 'Dancehall', 'Death Metal', 'Deep-house', 'Disco', 'Electro', 'Electronic', 'Garage', 'Goth', 'Grunge', 'Guitar', 'Hard Rock', 'Hardcore', 'Hardstyle', 'Hip-hop', 'Indie pop', 'Industrial', 'Iranian', 'Metal', 'Metal-misc', 'Movies', 'Party', 'Power-pop', 'Psych-rock', 'Punk-rock', 'R-N-B', 'Rock', 'SKA', 'Soundtracks']},
   'Adventure': {
     id: 12,
     acousticness: [0, 1],
@@ -170,7 +170,7 @@ const genreMap = {
     speechiness: [0, 1],
     tempo: [40, 200],
     valence: [0, 1],
-    genre:  ['Blues', 'Acoustic', 'Bossanova', 'Brazil', 'British', 'Cantopop', 'Chill', 'Classical', 'Country', 'Dance', 'Disco', 'Disney', 'Forro', 'French', 'Happy', 'Holidays', 'Indian', 'J-pop', 'Jazz', 'K-pop', 'Latin', 'Latino', 'Mandopop', 'Movies', 'MPB', 'Pagode', 'Party', 'Philippines-OPM', 'Piano', 'Pop', 'Rainy-day', 'Reggaeton', 'Rock-N-Roll', 'Romance', 'Sad', 'Salsa', 'Samba', 'Sertanejo', 'Sleep', 'Soundtracks', 'Summer']},
+    genre:  ['Blues', 'Acoustic', 'Bossanova', 'Brazil', 'British', 'Cantopop', 'Chill', 'Classical', 'Country', 'Dance', 'Disco', 'Disney', 'Forro', 'French', 'Happy', 'Holidays', 'Indian', 'J-pop', 'Jazz', 'K-pop', 'Latin', 'Latino', 'Mandopop', 'Movies', 'MPB', 'Pagode', 'Party', 'Philippines-OPM', 'Piano', 'Rainy-day', 'Reggaeton', 'Rock-N-Roll', 'Romance', 'Sad', 'Salsa', 'Samba', 'Sertanejo', 'Sleep', 'Soundtracks', 'Summer']},
   'Science Fiction': {
     id: 878,
     acousticness: [0, 1],
@@ -194,7 +194,7 @@ const genreMap = {
     speechiness: [0, 1],
     tempo: [120, 200],
     valence: [0, 1],
-    genre:  ['Acoustic', 'Alt-Rock', 'Bossanova', 'Brazil', 'Cantopop', 'Chill', 'Country', 'Dance', 'Disco', 'Groove', 'Happy', 'Jazz',  'Latin', 'Latino', 'Movies', 'Pop', 'Pop-film', 'Reggaeton', 'Samba', 'Sertanejo', 'Soul', 'Soundtracks']},
+    genre:  ['Acoustic', 'Alt-Rock', 'Bossanova', 'Brazil', 'Cantopop', 'Chill', 'Country', 'Dance', 'Disco', 'Groove', 'Happy', 'Jazz',  'Latin', 'Latino', 'Pop-film', 'Reggaeton', 'Samba', 'Sertanejo', 'Soul']},
   'Thriller': {
     id: 53,
     acousticness: [0, 1],
@@ -234,6 +234,7 @@ const genreMap = {
 }
 
 $('#mu-apps-screenshot').hide();
+
 // --------------------------------------------------------------------------------------------------- //
 // Authentication - in case of use authentication, creates web player instance
 // --------------------------------------------------------------------------------------------------- //
@@ -295,6 +296,7 @@ $('#mu-apps-screenshot').hide();
 let topTrackUris;
 let topTrackIds;
 let topTrackCombinedAnalysis;
+let trackLyrics = '';
 
 function loginAsUser() {
   const authEndpoint = 'https://accounts.spotify.com/authorize';
@@ -345,6 +347,7 @@ function getFeatures(songId, artistId, artistName, trackName) {
               genres: info.genres,
               lyrics: lyricsList
             }
+            trackLyrics = lyricsList.join(' ');
             
             prepareMovieSearch(trackAnalysis);
           });     
@@ -355,7 +358,7 @@ function getFeatures(songId, artistId, artistName, trackName) {
 
 function getTopTracks() {
   $.get('/top-tracks?token=' + _token, function(tracks) {
-    console.log(tracks)
+  //  console.log(tracks)
     let uris = [];
     let ids = [];
     
@@ -374,7 +377,7 @@ function getTopTracks() {
 
 function analyzeTracks(uris) {
   $.get('/audio-analysis-multi?uris=' + uris + '&token=' + _token, function(tracks) {
-        console.log(tracks);
+   //     console.log(tracks);
   
     topTrackCombinedAnalysis = getAverageAnalysis(tracks);
   });
@@ -382,12 +385,22 @@ function analyzeTracks(uris) {
 
 // function to discover 100 movies at a time (20 per call)
 function discoverMovies(relevantGenres, irrelevantGenres) {
-  $.get('/discover-movies?relevantGenres=' + relevantGenres.join('|') + '&irrelevantGenres=' + irrelevantGenres + '&page=1', function(movies1) {  
-    $.get('/discover-movies?relevantGenres=' + relevantGenres.join('|') + '&irrelevantGenres=' + irrelevantGenres + '&page=2', function(movies2) {  
-      $.get('/discover-movies?relevantGenres=' + relevantGenres.join('|') + '&irrelevantGenres=' + irrelevantGenres + '&page=3', function(movies3) { 
-        $.get('/discover-movies?relevantGenres=' + relevantGenres.join('|') + '&irrelevantGenres=' + irrelevantGenres + '&page=4', function(movies4) {
-          $.get('/discover-movies?relevantGenres=' + relevantGenres.join('|') + '&irrelevantGenres=' + irrelevantGenres + '&page=5', function(movies5) {  
-            rankMovies(movies1.results.concat(movies2.results, movies3.results, movies4.results, movies5.results));
+  $.get('/discover-movies?relevantGenres=' + relevantGenres.join('|') + '&irrelevantGenres=' + irrelevantGenres + '&page=1' + '&lyrics=' + trackLyrics, function(movies1) {  
+    $.get('/discover-movies?relevantGenres=' + relevantGenres.join('|') + '&irrelevantGenres=' + irrelevantGenres + '&page=2' + '&lyrics=' + trackLyrics, function(movies2) {  
+      $.get('/discover-movies?relevantGenres=' + relevantGenres.join('|') + '&irrelevantGenres=' + irrelevantGenres + '&page=3' + '&lyrics=' + trackLyrics, function(movies3) { 
+        $.get('/discover-movies?relevantGenres=' + relevantGenres.join('|') + '&irrelevantGenres=' + irrelevantGenres + '&page=4' + '&lyrics=' + trackLyrics, function(movies4) {
+          $.get('/discover-movies?relevantGenres=' + relevantGenres.join('|') + '&irrelevantGenres=' + irrelevantGenres + '&page=5' + '&lyrics=' + trackLyrics, function(movies5) {  
+            $.get('/discover-movies?relevantGenres=' + relevantGenres.join('|') + '&irrelevantGenres=' + irrelevantGenres + '&page=6' + '&lyrics=' + trackLyrics, function(movies6) {  
+              $.get('/discover-movies?relevantGenres=' + relevantGenres.join('|') + '&irrelevantGenres=' + irrelevantGenres + '&page=7' + '&lyrics=' + trackLyrics, function(movies7) {  
+                $.get('/discover-movies?relevantGenres=' + relevantGenres.join('|') + '&irrelevantGenres=' + irrelevantGenres + '&page=8' + '&lyrics=' + trackLyrics, function(movies8) { 
+                  $.get('/discover-movies?relevantGenres=' + relevantGenres.join('|') + '&irrelevantGenres=' + irrelevantGenres + '&page=9' + '&lyrics=' + trackLyrics, function(movies9) {
+                    $.get('/discover-movies?relevantGenres=' + relevantGenres.join('|') + '&irrelevantGenres=' + irrelevantGenres + '&page=10' + '&lyrics=' + trackLyrics, function(movies10) {  
+                      rankMovies(movies1.results.concat(movies2.results, movies3.results, movies4.results, movies5.results, movies6.results, movies7.results, movies8.results, movies9.results, movies10.results));
+                   });
+                  });
+                });
+              });
+            });
           });
         });
       });
@@ -517,6 +530,7 @@ function prepareMovieSearch(trackAnalysis) {
         }
     }
   }
+  console.log(trackAnalysis);
   
   relevantGenresMap.forEach((genre) => {
     if(genreMap[genre.name].acousticness[0] < trackAnalysis.acousticness && trackAnalysis.acousticness < genreMap[genre.name].acousticness[1]) {
@@ -566,9 +580,13 @@ function rankMovies(movies) {
           }
         }
       }
-      movie['score'] = score;
+
+      let lyricsMultiplier = 1;
+      lyricsMultiplier += movie.stringSimilarity;
+      movie['score'] = score*lyricsMultiplier;
       movieResults.push(movie);
     });
+    console.log(movieResults);
   }
   
   // sort descendingly
@@ -583,12 +601,11 @@ $('#mu-apps-screenshot').show();
      movieResults.forEach((movie) => {
               if(movie.poster_path != null) {
                 htmlParser += '<div class="mu-single-screeshot">'+
-                    '<img src="http://image.tmdb.org/t/p/w500/' + movie.poster_path + '" alt="App screenshot img">'+
+                    '<img src="http://image.tmdb.org/t/p/w500/' + movie.poster_path + '" style="height: 400px;" alt="' + movie.title + '"><br>'+
+                    '<p style="color:#ff5a5f;">' + movie.title + '</p>'+
                  ' </div>';
               }
               });
-     console.log(htmlParser);
-
 
 $('.mu-apps-screenshot-slider').html(htmlParser).slick('refresh');
 

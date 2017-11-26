@@ -109,6 +109,12 @@ app.get("/discover-movies", function (request, response) {
         response.send({results: []});
     }
     else{
+        res.results.forEach((result) => {
+          console.log(typeof result.overview);
+          console.log(typeof request.query.lyrics);
+          result['stringSimilarity'] = stringSimilarity.compareTwoStrings(result.overview, request.query.lyrics);
+          console.log(result['stringSimilarity']);
+        });
         response.send(res);
     }
   });
