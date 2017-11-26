@@ -4,6 +4,7 @@
 // --------------------------------------------------------------------------------------------------- //
 const genreMap = {
   'Action': {
+    id: 28,
     acousticness: [0, 0.6],
     danceability: [0, 0.8],
     energy: [0.4, 1],
@@ -15,6 +16,7 @@ const genreMap = {
     valence: [0, 1],
     genre: ['Rock', 'Alt-Rock', 'Alternative', 'Heavy Metal', 'Dubstep', 'Blues', 'Breakbeat', 'Chicago House', 'Club', 'Dancehall', 'Death Metal', 'Deep-house', 'Disco', 'Electro', 'Electronic', 'Garage', 'Goth', 'Grunge', 'Guitar', 'Hard Rock', 'Hardcore', 'Hardstyle', 'Hip-hop', 'Indie pop', 'Industrial', 'Iranian', 'Metal', 'Metal-misc', 'Movies', 'Party', 'Power-pop', 'Psych-rock', 'Punk-rock', 'R-N-B', 'Rock', 'SKA', 'Soundtracks']},
   'Adventure': {
+    id: 12,
     acousticness: [0, 1],
     danceability: [0, 1],
     energy: [0, 1],
@@ -26,6 +28,7 @@ const genreMap = {
     valence: [0, 1],
     genre: ['Acoustic', 'Alt-Rock', 'Bossanova', 'Disney', 'Folk', 'Funk', 'Groove', 'Happy', 'Heavy Metal', 'J-pop', 'Movies',  'Classical', 'MPB', 'New-age', 'Opera', 'Pop-film', 'Rainy-day', 'Show-tunes', 'Soundtracks']},
   'Animation': {
+    id: 16,
     acousticness: [0, 1],
     danceability: [0, 1],
     energy: [0.4, 1],
@@ -37,6 +40,7 @@ const genreMap = {
     valence: [0, 1],
     genre: ['Anime', 'Children', 'Disney', 'French', 'Holidays', 'J-idol', 'Kids', 'Movies', 'Show-tunes', 'Soundtracks']},
   'Comedy': {
+    id: 35,
     acousticness: [0, 0.8],
     danceability: [0, 1],
     energy: [0.4, 1],
@@ -48,6 +52,7 @@ const genreMap = {
     valence: [0, 1],
     genre: ['Alt-Rock', 'British', 'Comedy', 'Dancehall', 'Disco', 'Funk', 'German', 'Gospel', 'Holidays', 'Indian', 'Kids', 'Movies', 'Reggaeton', 'Rock-N-Roll', 'Show-tunes', 'Soul', 'Soundtracks']},
   'Crime': {
+    id: 80,
     acousticness: [0, 0.9],
     danceability: [0, 1],
     energy: [0.4, 1],
@@ -59,6 +64,7 @@ const genreMap = {
     valence: [0, 1],
     genre: ['Blues', 'Breakbeat', 'Chicago House', 'Club', 'Funk', 'Garage', 'Gospel', 'Grunge', 'Guitar', 'Hard Rock', 'Hardstyle', 'Hip-hop', 'Honky-Tonk', 'Industrial', 'Movies', 'Power-pop', 'Psych-rock', 'Punk', 'R-N-B', 'Reggae', 'Rock', 'Rockabilly', 'Soundtracks']},
   'Documentary': {
+    id: 99,
     acousticness: [0, 0.8],
     danceability: [0, 1],
     energy: [0, 0.6],
@@ -70,6 +76,7 @@ const genreMap = {
     valence: [0, 1],
     genre:  ['Acoustic', 'Afrobeat', 'Alternative', 'Ambient', 'Chill', 'Classical', 'Folk', 'French', 'Hip-hop', 'Malay', 'MPB', 'New-age', 'Opera', 'Piano', 'Soundtracks']},
   'Drama': {
+    id: 18,
     acousticness: [0, 0.8],
     danceability: [0, 0.6],
     energy: [0, 0.6],
@@ -81,6 +88,7 @@ const genreMap = {
     valence: 0,
     genre:  ['Acoustic', 'Blues', 'Bossanova', 'British', 'Chill', 'Classical', 'EMO', 'French', 'Happy', 'Honky-Tonk', 'Indie', 'Indie pop', 'Jazz', 'Movies', 'New-age', 'Opera', 'Piano', 'Power-pop', 'Punk', 'Punk-rock', 'Rainy-day', 'Romance', 'Sad', 'Singer-songwriter', 'Sleep', 'Soundtracks']},
   'Family': {
+    id: 10751,
     acousticness: [0, 1],
     danceability: [0, 0.75],
     energy: [0, 0.75],
@@ -92,6 +100,7 @@ const genreMap = {
     valence: [0, 1],
     genre:  ['Acoustic', 'Brazil', 'British', 'Children', 'Country', 'Disco', 'Forro', 'Groove', 'Happy', 'Holidays', 'Indian', 'Iranian', 'Jazz', 'Kids',  'Latin', 'Movies', 'Rock-N-Roll', 'Show-tunes', 'Soundtracks']},
   'Fantasy': {
+    id: 14,
     acousticness: [0, 1],
     danceability: [0, 0.33],
     energy: [0, 0.4],
@@ -103,6 +112,7 @@ const genreMap = {
     valence: [0, 1],
     genre:  ['Acoustic', 'Bossanova', 'Chill', 'Dance', 'Disney', 'EMO', 'Folk', 'Happy', 'Heavy Metal', 'New-age', 'Piano', 'Show-tunes', 'Soundtracks', 'Movies' ]},
   'History': {
+    id: 36,
     acousticness: [0, 1],
     danceability: [0, 0.33],
     energy: [0, 0.4],
@@ -114,6 +124,7 @@ const genreMap = {
     valence: [0, 1],
     genre:  ['Ambient', 'Chill', 'Folk', 'French', 'Indie', 'Iranian', 'Malay', 'Movies', 'New-age', 'Opera', 'Show-tunes', 'Soundtracks']},
   'Horror': {
+    id: 27,
     acousticness: [0, 1],
     danceability: [0, 0.33],
     energy: [0, 0.4],
@@ -125,6 +136,7 @@ const genreMap = {
     valence: [0, 1],
     genre:  ['Ambient', 'Breakbeat', 'Club', 'Death Metal', 'EMO',  'Grindcore', 'Heavy Metal', 'Metal', 'Metalcore', 'Movies', 'Rock', 'Soundtracks']},
   'Music': {
+    id: 10402,
     acousticness: [0, 1],
     danceability: [0.45, 1],
     energy: [0.45, 1],
@@ -136,6 +148,7 @@ const genreMap = {
     valence: [0, 1],
     genre:  ['Blues', 'Acoustic', 'Afrobeat', 'Bossanova', 'Chill', 'Classical', 'Dance', 'Dancehall', 'Forro', 'Funk', 'Gospel',  'Groove', 'Happy', 'Hip-hop', 'Indian', 'J-idol', 'Jazz', 'Kids', 'Latin', 'Movies', 'MPB', 'Pagode', 'Party', 'R-N-B', 'Reggae', 'Reggaeton', 'Rock', 'Rock-N-Roll', 'Rockabilly', 'Salsa', 'Samba', 'Show-tunes', 'Soul', 'Soundtracks']},
   'Mystery': {
+    id: 9648,
     acousticness: [0, 1],
     danceability: [0, 0.45],
     energy: [0, 0.4],
@@ -147,6 +160,7 @@ const genreMap = {
     valence: [0, 1],
     genre:  ['Ambient', 'Club', 'Blues', 'Classical', 'Electro', 'Funk', 'Garage', 'Goth', 'Hard Rock', 'Industrial', 'Jazz', 'Movies', 'Psych-rock', 'Punk', 'Soundtracks', 'Rock-N-Roll']},
   'Romance': {
+    id: 10749,
     acousticness: [0, 1],
     danceability: [0, 0.45],
     energy: [0, 0.4],
@@ -158,6 +172,7 @@ const genreMap = {
     valence: [0, 1],
     genre:  ['Blues', 'Acoustic', 'Bossanova', 'Brazil', 'British', 'Cantopop', 'Chill', 'Classical', 'Country', 'Dance', 'Disco', 'Disney', 'Forro', 'French', 'Happy', 'Holidays', 'Indian', 'J-pop', 'Jazz', 'K-pop', 'Latin', 'Latino', 'Mandopop', 'Movies', 'MPB', 'Pagode', 'Party', 'Philippines-OPM', 'Piano', 'Pop', 'Rainy-day', 'Reggaeton', 'Rock-N-Roll', 'Romance', 'Sad', 'Salsa', 'Samba', 'Sertanejo', 'Sleep', 'Soundtracks', 'Summer']},
   'Science Fiction': {
+    id: 878,
     acousticness: [0, 1],
     danceability: [0, 0.45],
     energy: [0, 1],
@@ -169,6 +184,7 @@ const genreMap = {
     valence: [0, 1],
     genre:  ['Alt-Rock', 'Alternative', 'Ambient', 'Breakbeat', 'Club', 'Detroit-techno', 'Drum-and-bass', 'Dub', 'Dubstep', 'EDM', 'Electro', 'Electronic', 'Goth', 'Groove', 'Guitar', 'Hardstyle', 'House', 'IDM', 'Indie', 'Industrial', 'Iranian', 'J-dance', 'J-rock', 'Metal', 'Metal-misc', 'Minimal-techno', 'Movies', 'Party', 'Post-dubstep', 'Power-pop', 'Progressive-house', 'Psych-rock', 'Rock', 'Rockabilly', 'Soundtracks']},
   'TV Movie': {
+    id: 10770,
     acousticness: [0, 1],
     danceability: [0.45, 1],
     energy: [0.45, 1],
@@ -180,6 +196,7 @@ const genreMap = {
     valence: [0, 1],
     genre:  ['Acoustic', 'Alt-Rock', 'Bossanova', 'Brazil', 'Cantopop', 'Chill', 'Country', 'Dance', 'Disco', 'Groove', 'Happy', 'Jazz',  'Latin', 'Latino', 'Movies', 'Pop', 'Pop-film', 'Reggaeton', 'Samba', 'Sertanejo', 'Soul', 'Soundtracks']},
   'Thriller': {
+    id: 53,
     acousticness: [0, 1],
     danceability: [0, 0.45],
     energy: [0, 0.4],
@@ -191,6 +208,7 @@ const genreMap = {
     valence: [0, 1],
     genre:  ['Ambient', 'Club', 'Electro', 'EMO', 'Garage', 'Goth', 'Grunge', 'IDM', 'Movies', 'Punk-rock', 'Soundtracks']},
   'War': {
+    id: 10752,
     acousticness: [0, 1],
     danceability: [0, 0.45],
     energy: [0, 1],
@@ -202,6 +220,7 @@ const genreMap = {
     valence: [0.5, 1],
     genre:  ['Acoustic', 'Breakbeat', 'Classical', 'Country', 'Drum-and-bass', 'Grindcore', 'Grunge', 'Hard Rock', 'Metal', 'Movies', 'Power-pop', 'Rock', 'Soundtracks']},
   'Western': {
+    id: 37,
     acousticness: [0, 1],
     danceability: [0, 1],
     energy: [0, 1],
@@ -292,7 +311,8 @@ function loginAsUser() {
 
 function getFeatures(songId, artistId, artistName, trackName) {
   let trackEl = '';
-  
+  genreScores = {};
+  movieResults = [];
   $.get('/features?id=' + songId, function(track) {
       // trackEl += '<li>' + 
       // 'acousticness: ' + track.acousticness +  '<br>' +              
@@ -357,21 +377,20 @@ function analyzeTracks(uris) {
         console.log(tracks);
   
     topTrackCombinedAnalysis = getAverageAnalysis(tracks);
-    
-    // tracks.forEach(function(track) {
-    //   let trackEl = $('<li>' + 
-    //   'acousticness: ' + track.acousticness +  '<br>' +              
-    //   'danceability: ' + track.danceability + '<br>' +
-    //   'energy: ' + track.energy + '<br>' +
-    //   'instrumentalness: ' + track.instrumentalness + '<br>' +
-    //   'liveness: ' + track.liveness + '<br>' +
-    //   'mode: ' + track.mode + '<br>' +
-    //   'speechiness: ' + track.speechiness + '<br>' +
-    //   'tempo: ' + track.tempo + '<br>' +
-    //   'valence: ' + track.valence 
-    //                   + '</li>') ;
-    //   trackEl.appendTo('#top-analysis');
-    // });
+  });
+ }
+
+function discoverMovies(relevantGenres, irrelevantGenres) {
+  $.get('/discover-movies?relevantGenres=' + relevantGenres.join('|') + '&irrelevantGenres=' + irrelevantGenres + '&page=1', function(movies1) {  
+    $.get('/discover-movies?relevantGenres=' + relevantGenres.join('|') + '&irrelevantGenres=' + irrelevantGenres + '&page=2', function(movies2) {  
+      $.get('/discover-movies?relevantGenres=' + relevantGenres.join('|') + '&irrelevantGenres=' + irrelevantGenres + '&page=3', function(movies3) { 
+        $.get('/discover-movies?relevantGenres=' + relevantGenres.join('|') + '&irrelevantGenres=' + irrelevantGenres + '&page=4', function(movies4) {
+          $.get('/discover-movies?relevantGenres=' + relevantGenres.join('|') + '&irrelevantGenres=' + irrelevantGenres + '&page=5', function(movies5) {  
+            rankMovies(movies1.results.concat(movies2.results, movies3.results, movies4.results, movies5.results));
+          });
+        });
+      });
+    });
   });
  }
   
@@ -381,7 +400,9 @@ function analyzeTracks(uris) {
   let trackID = '';
   let searchQuery = '';
   let resultIDs = [];
-  
+  let genreScores = {};
+  let movieResults = [];
+
   $('form').submit(function(event) {
     
     event.preventDefault();
@@ -457,24 +478,88 @@ function analyzeTracks(uris) {
   }
   
 function prepareMovieSearch(trackAnalysis) {
+  let irrelevantGenres = [];
   let relevantGenres = [];
+  let relevantGenresMap = [];
+  
   for (var key in genreMap) {
-    console.log(key);
     if (genreMap.hasOwnProperty(key)) {
+        let stepper = false;
         for(let i = 0; i < genreMap[key].genre.length; i++) {
-          console.log(genreMap[key].genre[i]);
-          console.log(trackAnalysis.genres);
           if(trackAnalysis.genres.includes(genreMap[key].genre[i].toLowerCase())) {
-            relevantGenres.push(key);
+            stepper = true;
+            relevantGenres.push(genreMap[key].id);
+            relevantGenresMap.push({name: key, id: genreMap[key].id, score: 0});
             break;
           }
         }
+        if(!stepper) {
+          irrelevantGenres.push(genreMap[key].id);
+        } else {
+          stepper = false;
+        }
     }
   }
-  discoverMovies(relevantGenres);
+  
+  relevantGenresMap.forEach((genre) => {
+    if(genreMap[genre.name].acousticness[0] < trackAnalysis.acousticness && trackAnalysis.acousticness < genreMap[genre.name].acousticness[1]) {
+      genre.score += 1;
+    }
+    
+    if(genreMap[genre.name].danceability[0] < trackAnalysis.danceability && trackAnalysis.danceability < genreMap[genre.name].danceability[1]) {
+      genre.score += 1;
+    }
+
+    if(genreMap[genre.name].energy[0] < trackAnalysis.energy && trackAnalysis.energy < genreMap[genre.name].energy[1]) {
+      genre.score += 1;
+    }
+    
+    if(genreMap[genre.name].instrumentalness[0] < trackAnalysis.instrumentalness && trackAnalysis.instrumentalness < genreMap[genre.name].instrumentalness[1]) {
+      genre.score += 1;
+    }
+
+    if(genreMap[genre.name].liveness[0] < trackAnalysis.liveness && trackAnalysis.liveness < genreMap[genre.name].liveness[1]) {
+      genre.score += 1;
+    }
+    
+    if(genreMap[genre.name].speechiness[0] < trackAnalysis.speechiness && trackAnalysis.speechiness < genreMap[genre.name].speechiness[1]) {
+      genre.score += 1;
+    }
+    
+    if(genreMap[genre.name].tempo[0] < trackAnalysis.tempo && trackAnalysis.tempo < genreMap[genre.name].tempo[1]) {
+      genre.score += 1;
+    }
+    
+    if(genreMap[genre.name].mode == trackAnalysis.mode || genreMap[genre.name].mode == null) {
+      genre.score += 1;
+    }
+  });
+  genreScores = relevantGenresMap;
+  discoverMovies(relevantGenres, irrelevantGenres);
 }
 
-
+function rankMovies(movies) {
+  if(movies['type'] != 'error') {
+    movies.forEach((movie) => {
+      let score = 0
+      for (var key in genreScores) {
+        if (genreScores.hasOwnProperty(key)) {
+          if(movie.genre_ids.includes(genreScores[key].id)) {
+            score += genreScores[key].score;
+          }
+        }
+      }
+      movie['score'] = score;
+      movieResults.push(movie);
+    });
+  }
+  
+  // sort descendingly
+  movieResults.sort(function(a, b) {
+    return b.score - a.score;
+  });
+  console.log(movieResults);
+}
 
 function sortByFrequency(string) {
   let filteredString = string.replace(',', ' ');

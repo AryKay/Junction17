@@ -10,7 +10,8 @@
     "express": "^4.16.2",
     "spotify-web-api-node": "^2.5.0",
     "moviedb": "^0.2.10",
-    "lyric-get": "^1.0.3"
+    "lyric-get": "^1.0.3",
+    "string-similarity": "^1.2.0"
   },
   "engines": {
     "node": "6.10.x"
@@ -23,6 +24,7 @@
     "express",
     "spotify",
     "moviedb",
-    "lyric-get"
+    "lyric-get",
+    "string-similarity"
   ]
 }
