@@ -386,27 +386,18 @@ function analyzeTracks(uris) {
 
 // function to discover 100 movies at a time (20 per call)
 function discoverMovies(relevantGenres, irrelevantGenres) {
-  $.get('/discover-movies?relevantGenres=' + relevantGenres.join('|') + '&irrelevantGenres=' + irrelevantGenres + '&page=1' + '&lyrics=' + trackLyrics, function(movies1) {  
-    $.get('/discover-movies?relevantGenres=' + relevantGenres.join('|') + '&irrelevantGenres=' + irrelevantGenres + '&page=2' + '&lyrics=' + trackLyrics, function(movies2) {  
-      $.get('/discover-movies?relevantGenres=' + relevantGenres.join('|') + '&irrelevantGenres=' + irrelevantGenres + '&page=3' + '&lyrics=' + trackLyrics, function(movies3) { 
-        $.get('/discover-movies?relevantGenres=' + relevantGenres.join('|') + '&irrelevantGenres=' + irrelevantGenres + '&page=4' + '&lyrics=' + trackLyrics, function(movies4) {
-          $.get('/discover-movies?relevantGenres=' + relevantGenres.join('|') + '&irrelevantGenres=' + irrelevantGenres + '&page=5' + '&lyrics=' + trackLyrics, function(movies5) {  
-            $.get('/discover-movies?relevantGenres=' + relevantGenres.join('|') + '&irrelevantGenres=' + irrelevantGenres + '&page=6' + '&lyrics=' + trackLyrics, function(movies6) {  
-              $.get('/discover-movies?relevantGenres=' + relevantGenres.join('|') + '&irrelevantGenres=' + irrelevantGenres + '&page=7' + '&lyrics=' + trackLyrics, function(movies7) {  
-                $.get('/discover-movies?relevantGenres=' + relevantGenres.join('|') + '&irrelevantGenres=' + irrelevantGenres + '&page=8' + '&lyrics=' + trackLyrics, function(movies8) { 
-                  $.get('/discover-movies?relevantGenres=' + relevantGenres.join('|') + '&irrelevantGenres=' + irrelevantGenres + '&page=9' + '&lyrics=' + trackLyrics, function(movies9) {
-                    $.get('/discover-movies?relevantGenres=' + relevantGenres.join('|') + '&irrelevantGenres=' + irrelevantGenres + '&page=10' + '&lyrics=' + trackLyrics, function(movies10) {  
-                      rankMovies(movies1.results.concat(movies2.results, movies3.results, movies4.results, movies5.results, movies6.results, movies7.results, movies8.results, movies9.results, movies10.results));
-                   });
-                  });
-                });
-              });
-            });
-          });
-        });
-      });
+  let movieResults = [];
+
+  for(let i = 1; i < 41; i++) {
+    $.get('/discover-movies?relevantGenres=' + relevantGenres.join('|') + '&irrelevantGenres=' + irrelevantGenres + '&page=' + i + '&lyrics=' + trackLyrics, function(movies) {  
+      movieResults = movieResults.concat(movies.results);
     });
-  });
+  }
+
+  setTimeout(function() {
+    rankMovies(movieResults);
+  }, 5000);
+
  }
 
 // function discoverMovies(relevantGenres, irrelevantGenres) {
