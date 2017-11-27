@@ -332,7 +332,7 @@ function getFeatures(songId, artistId, artistName, trackName) {
         // trackEl += 'genres: ' + info.genres.join(',') + '<br>';
 
           $.get('/track-lyrics?artist=' + artistName + '&name=' + trackName, function(lyrics) {
-            let lyricsList = sortByFrequency(lyrics).slice(0, 10); 
+            let lyricsList = sortByFrequency(lyrics).slice(0, 20); 
             // trackEl += 'lyrics: ' + lyricsList.join(',') + '</li>';
             // $(trackEl).appendTo('#top-analysis');
             let trackAnalysis = {
@@ -517,7 +517,7 @@ function prepareMovieSearch(trackAnalysis) {
     if (genreMap.hasOwnProperty(key)) {
         let stepper = false;
         for(let i = 0; i < genreMap[key].genre.length; i++) {
-          if(trackAnalysis.genres.includes(genreMap[key].genre[i].toLowerCase())) {
+          if(trackAnalysis.genres.join(' ').includes(genreMap[key].genre[i].toLowerCase())) {
             stepper = true;
             relevantGenres.push(genreMap[key].id);
             relevantGenresMap.push({name: key, id: genreMap[key].id, score: 0});
