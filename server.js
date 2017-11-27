@@ -119,7 +119,7 @@ l.get(request.query.artist.replace(/ /g,"_"), request.query.name.replace(/ /g,"_
 });
 
 app.get("/discover-movies", function (request, response) {
-  MovieDB.discoverMovie({ with_genres: request.query.relevantGenres, without_genres: request.query.irrelevantGenres, language: 'en-US', sort_by: 'popularity.desc', include_adult: false, include_video: false, page: request.query.page }, (err, res) => {
+  MovieDB.discoverMovie({ with_genres: request.query.relevantGenres, without_genres: request.query.irrelevantGenres, language: 'en-US', sort_by: 'popularity.desc', include_adult: false, include_video: false, page: request.query.page, 'vote_average.gte': 6, 'vote_count.gte': 50 }, (err, res) => {
     if(err){
         response.send({results: []});
     }
