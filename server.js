@@ -20,8 +20,6 @@ var spotifyApi = new SpotifyWebApi({
   clientSecret : 'bc57b04d43f3433aa064de9782c20880',
 });
 
-setInterval(function(){ 
-  
   spotifyApi.clientCredentialsGrant()
     .then(function(data) {
       console.log('The access token expires in ' + data.body['expires_in']);
@@ -32,7 +30,20 @@ setInterval(function(){
     }, function(err) {
       console.log('Something went wrong when retrieving an access token', err.message);
   });
- }, 15000);
+
+setInterval(function(){ 
+
+  spotifyApi.clientCredentialsGrant()
+    .then(function(data) {
+      console.log('The access token expires in ' + data.body['expires_in']);
+      console.log('The access token is ' + data.body['access_token']);
+
+      // Save the access token so that it's used in future calls
+      spotifyApi.setAccessToken(data.body['access_token']);
+    }, function(err) {
+      console.log('Something went wrong when retrieving an access token', err.message);
+  });
+ }, 3000000);
 
 
 
@@ -114,10 +125,10 @@ app.get("/discover-movies", function (request, response) {
     }
     else{
         res.results.forEach((result) => {
-          console.log(typeof result.overview);
-          console.log(typeof request.query.lyrics);
+          ///console.log(typeof result.overview);
+          //console.log(typeof request.query.lyrics);
           result['stringSimilarity'] = stringSimilarity.compareTwoStrings(result.overview, request.query.lyrics);
-          console.log(result['stringSimilarity']);
+          //console.log(result['stringSimilarity']);
         });
         response.send(res);
     }
