@@ -591,7 +591,7 @@ function rankMovies(movies) {
   // render results
 $('#mu-apps-screenshot').show();
     let htmlParser = '';
-     movieResults.forEach((movie) => {
+     movieResults.slice(0, 50).forEach((movie) => {
               if(movie.poster_path != null) {
                 htmlParser += '<div class="mu-single-screeshot">'+
                     '<img src="http://image.tmdb.org/t/p/w500/' + movie.poster_path + '" style="height: 400px;" alt="' + movie.title + '"><br>'+
